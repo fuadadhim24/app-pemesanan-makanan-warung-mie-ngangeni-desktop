@@ -70,9 +70,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank1.setText(rs.getString(1));
             }
-            conn.close();
-            pst.close();
-            rs.close();
+            
+            
+            
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -86,9 +86,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank2.setText(rs.getString(1));
             }
-            conn.close();
-            pst.close();
-            rs.close();
+            
+            
+            
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -102,9 +102,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank3.setText(rs.getString(1));
             }
-            conn.close();
-            pst.close();
-            rs.close();
+            
+            
+            
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -159,8 +159,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                     this.labelpemasukan.setText("Rp. " + totalPemasukan);
                 }
             }
-            conn.close();
-            pst.close();
+            
+            
             hariRs.close();
             
 
@@ -180,8 +180,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int mingguPemasukan = mingguRs.getInt("TOTAL");
                 labelpemasukanminggu.setText("Rp. " + mingguPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             mingguRs.close();
             // Query SQL untuk menghitung pemasukan bulan ini
             String bulanSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
@@ -198,8 +198,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int bulanPemasukan = bulanRs.getInt("TOTAL");
                 labelpemasukanbulan.setText("Rp. " + bulanPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             bulanRs.close();
             // Query SQL untuk menghitung pemasukan tahun ini
             String tahunSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
@@ -216,8 +216,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int tahunPemasukan = tahunRs.getInt("TOTAL");
                 labelpemasukantahun.setText("Rp. " + tahunPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             tahunRs.close();
            
         } catch(Exception e){
@@ -272,8 +272,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                     this.labelpemasukan.setText("Rp. " + totalPemasukan);
                 }
             }
-            conn.close();
-            pst.close();
+            
+            
             hariRs.close();
 
             
@@ -292,8 +292,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int mingguPemasukan = mingguRs.getInt("TOTAL");
                 labelpemasukanminggu.setText("Rp. " + mingguPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             mingguRs.close();
             
             // Query SQL untuk menghitung pemasukan bulan ini
@@ -311,8 +311,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int bulanPemasukan = bulanRs.getInt("TOTAL");
                 labelpemasukanbulan.setText("Rp. " + bulanPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             bulanRs.close();
             // Query SQL untuk menghitung pemasukan tahun ini
             String tahunSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
@@ -329,8 +329,8 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int tahunPemasukan = tahunRs.getInt("TOTAL");
                 labelpemasukantahun.setText("Rp. " + tahunPemasukan);
             }
-            conn.close();
-            pst.close();
+            
+            
             tahunRs.close();
            
         } catch(Exception e){

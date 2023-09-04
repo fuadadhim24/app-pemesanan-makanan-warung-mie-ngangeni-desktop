@@ -147,6 +147,9 @@ public class kasir extends javax.swing.JFrame {
             int count = resultSet.getInt(1);
             return count > 0;
         }
+        conn.close();
+        statement.close();
+        resultSet.close();
     } catch (Exception e) {
             e.printStackTrace();
         }
@@ -883,6 +886,9 @@ public class kasir extends javax.swing.JFrame {
                     break;
                 }
             }
+            conn.close();
+        rs.close();
+        pstm.close();
 
         } catch (Exception e) {
             e.printStackTrace();
