@@ -546,6 +546,9 @@ public class AdminMenu extends javax.swing.JFrame {
                     break;
                 }
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -3116,6 +3119,8 @@ public class AdminMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data berhasil diupload ke database");
             kosongkanform();
             tampilkandata();
+            conn.close();
+            pstm.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
         }
@@ -3146,6 +3151,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3177,6 +3185,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3208,6 +3219,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3239,6 +3253,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3270,6 +3287,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3301,6 +3321,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3332,6 +3355,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3363,6 +3389,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3394,6 +3423,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3425,6 +3457,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3456,6 +3491,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3487,6 +3525,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3518,6 +3559,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3549,6 +3593,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3580,6 +3627,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3611,6 +3661,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3642,6 +3695,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3673,6 +3729,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3704,6 +3763,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3735,6 +3797,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3774,6 +3839,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3813,6 +3881,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3852,6 +3923,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3891,6 +3965,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3930,6 +4007,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3969,6 +4049,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4008,6 +4091,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4047,6 +4133,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4086,6 +4175,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4125,6 +4217,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4164,6 +4259,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4203,6 +4301,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4242,6 +4343,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4281,6 +4385,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4320,6 +4427,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4359,6 +4469,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4398,6 +4511,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4437,6 +4553,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4474,6 +4593,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setIcon(ic);
                 displaygambar.setVisible(true);
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4513,6 +4635,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4551,6 +4676,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4587,6 +4715,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4623,6 +4754,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4659,6 +4793,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4695,6 +4832,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4731,6 +4871,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4767,6 +4910,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4803,6 +4949,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4839,6 +4988,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4875,6 +5027,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4911,6 +5066,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4947,6 +5105,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4983,6 +5144,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5019,6 +5183,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5055,6 +5222,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5091,6 +5261,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5127,6 +5300,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5163,6 +5339,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5200,6 +5379,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5236,6 +5418,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Menu telah dihapus");
                 tampilkandata();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -5293,6 +5478,8 @@ public class AdminMenu extends javax.swing.JFrame {
 
             tampilkandata();
             kosongkanform();
+            conn.close();
+            pstm.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

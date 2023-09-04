@@ -213,6 +213,9 @@ public class AdminPesanan extends javax.swing.JFrame {
                 }
             }
             rubahDesainJTable();
+            conn.close();
+            statement.close();
+            rs.close();
 
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
@@ -243,9 +246,6 @@ public class AdminPesanan extends javax.swing.JFrame {
             cbFilter.setSelectedIndex(1);
             tampilkanData(query);
         }
-
-
-        
 
         // Memeriksa apakah hasil query mengembalikan data
         boolean pesanan = pilihTempatMakan1.getText()==null;
@@ -1818,6 +1818,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -1841,6 +1843,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1858,6 +1862,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1880,6 +1886,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -1974,6 +1982,9 @@ public class AdminPesanan extends javax.swing.JFrame {
                         btnfiltermenunggupembayaran.setEnabled(true);                        
                     }
                 }
+                conn.close();
+            statement2.close();
+            rs2.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }  
@@ -2015,6 +2026,9 @@ public class AdminPesanan extends javax.swing.JFrame {
                         btnfiltermenunggupembayaran.setEnabled(true);                        
                     }
                 }
+                conn.close();
+                statement2.close();
+                rs2.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2168,6 +2182,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2191,6 +2207,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2208,6 +2226,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();        
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2249,6 +2269,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();            
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2272,6 +2294,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2289,6 +2313,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2330,6 +2356,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2353,6 +2381,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2370,6 +2400,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2411,6 +2443,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2434,6 +2468,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2451,6 +2487,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2492,6 +2530,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2515,6 +2555,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2532,6 +2574,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2573,6 +2617,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2596,6 +2642,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2613,6 +2661,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2654,6 +2704,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2677,6 +2729,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2694,6 +2748,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2735,6 +2791,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2758,6 +2816,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2775,6 +2835,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2816,6 +2878,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2839,6 +2903,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2856,6 +2922,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2897,6 +2965,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -2920,6 +2990,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2937,6 +3009,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -2978,6 +3052,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 rubahDesainJTable();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchFieldException ex) {
@@ -3001,6 +3077,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 pstm.executeUpdate();
                 scheduleDataUpdateFilter();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -3018,6 +3096,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 scheduleDataUpdateFilter();
                 pstm.executeUpdate();
                 cbFilter.setSelectedIndex(1);
+                conn.close();
+                pstm.close();
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPesanan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -3041,6 +3121,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3060,6 +3142,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3079,6 +3163,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3098,6 +3184,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3117,6 +3205,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3136,6 +3226,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3155,6 +3247,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3174,6 +3268,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3193,6 +3289,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3212,6 +3310,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -3231,6 +3331,8 @@ public class AdminPesanan extends javax.swing.JFrame {
                 java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
                 pstm.execute();
                 scheduleDataUpdateFilter();
+                conn.close();
+                pstm.close();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }

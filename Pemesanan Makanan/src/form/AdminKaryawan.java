@@ -607,6 +607,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                     break;
                 }
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -3214,6 +3217,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Data berhasil diupload ke database");
         kosongkanform();
         tampilkandata();
+        conn.close();
+            pstm.close();
+            pstm1.close();
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
     }
@@ -3238,12 +3244,6 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 //set icon
                 displaygambar.setIcon(ic);
                 displaygambar.setVisible(true);
-                 
-                
-            
-            
-            
-
             }else if(result == JFileChooser.CANCEL_OPTION){
                 System.out.println("No Data");
             }
@@ -3338,6 +3338,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 btnjabatan.setText(" ADMIN");   
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3375,6 +3378,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setIcon(ic);
                 displaygambar.setVisible(true);
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3417,6 +3423,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3495,6 +3504,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
         
         tampilkandata();
         kosongkanform();
+        conn.close();
+        pstm.close();
+        pstm1.close();
     } catch (Exception e) {
         System.err.println(e.getMessage());
     }
@@ -3574,7 +3586,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -3613,7 +3630,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+            pstmdel.close();
+            pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -3631,9 +3653,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
         
         try {
             String sql = "SELECT *\n" +
-"FROM akun\n" +
-"INNER JOIN detail_akun ON akun.`nik/id` = detail_akun.`nik/id`\n" +
-"ORDER BY FIELD(hak_akses, 'admin', 'kasir', 'koki', 'waiter') " +
+            "FROM akun\n" +
+            "INNER JOIN detail_akun ON akun.`nik/id` = detail_akun.`nik/id`\n" +
+            "ORDER BY FIELD(hak_akses, 'admin', 'kasir', 'koki', 'waiter') " +
             "LIMIT 1 OFFSET 3;";
             java.sql.Connection conn = (Connection) Config.configDB();
             java.sql.PreparedStatement pstm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -3656,6 +3678,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3695,6 +3720,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3734,6 +3762,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3773,6 +3804,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3812,6 +3846,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3851,6 +3888,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3890,6 +3930,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3929,6 +3972,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -3968,6 +4014,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4007,6 +4056,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4046,6 +4098,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4085,6 +4140,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4124,6 +4182,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4163,6 +4224,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4202,6 +4266,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4241,6 +4308,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4280,6 +4350,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 displaygambar.setVisible(true);
                 
             }
+            conn.close();
+            rs.close();
+            pstm.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4318,7 +4391,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4356,7 +4434,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4394,7 +4477,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4432,7 +4520,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4470,7 +4563,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4508,7 +4606,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4546,7 +4649,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4584,7 +4692,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4622,7 +4735,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            rs.close();
+            pstm.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4660,7 +4778,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4698,7 +4821,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4736,7 +4864,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4774,7 +4907,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4812,7 +4950,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4850,7 +4993,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4888,7 +5036,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4926,7 +5079,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             // Tampilkan pesan berhasil dihapus
                 JOptionPane.showMessageDialog(this, "Akun telah dihapus");
                 tampilkandata();
+                pstmdel.close();
+                pstmdel2.close();
             }
+            conn.close();
+            pstm.close();
+            rs.close();
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
@@ -4958,9 +5116,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -4996,6 +5155,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 
                 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5031,6 +5193,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 
                 
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5098,9 +5263,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5133,9 +5299,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5168,9 +5335,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5203,9 +5371,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5238,9 +5407,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5273,9 +5443,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5308,9 +5479,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5343,9 +5515,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5378,9 +5551,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5413,9 +5587,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5448,9 +5623,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5483,9 +5659,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5518,9 +5695,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5553,9 +5731,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5588,9 +5767,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
                 popupdisplaygambar.setIcon(ic);
                 
-                
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -5625,8 +5805,10 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 popupdisplaygambar.setIcon(ic);
                 btnjabatan.setText(" ADMIN");
                 
-                
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             System.err.println(e.getMessage());

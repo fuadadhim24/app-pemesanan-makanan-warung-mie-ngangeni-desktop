@@ -146,6 +146,8 @@ public class forgotpassword2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Edit Data Berhasil...");
             this.setVisible(false);
             new MainDisplay().setVisible(true);
+            conn.close();
+            pstm.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Gagal Update Password");
         }

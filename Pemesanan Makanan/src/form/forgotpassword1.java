@@ -93,7 +93,9 @@ public class forgotpassword1 extends javax.swing.JFrame {
         this.dispose(); 
                
             }
-            
+            conn.close();
+            pst.close();
+            rs.close();
         } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "gagal");
         }

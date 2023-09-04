@@ -172,6 +172,8 @@ public class MainPesanPembeli extends javax.swing.JFrame {
             int count = resultSet.getInt(1);
             return count > 0;
         }
+        conn.close();
+        resultSet.close();
     } catch (Exception e) {
             e.printStackTrace();
         }
@@ -889,6 +891,9 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                     break;
                 }
             }
+            conn.close();
+            pstm.close();
+            rs.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -4957,6 +4962,10 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                                     insertStatement.executeUpdate();
                                 }
                             }
+                            conn.close();
+                            InsertPrepareStatement.close();
+                            insertStatement.close();
+                            selectIdMenuStatement.close();
                         
                     } catch (Exception e) {
                         e.printStackTrace();

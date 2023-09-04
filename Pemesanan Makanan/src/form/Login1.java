@@ -450,6 +450,9 @@ public class Login1 extends javax.swing.JFrame {
                 }
                 
         }
+            pst.close();
+            conn.close();
+            rs.close();
     }   catch (SQLException ex) {
             Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchFieldException ex) {
@@ -723,6 +726,9 @@ public class Login1 extends javax.swing.JFrame {
                     timer.start();
                 }
         }
+            conn.close();
+            pst.close();
+            rs.close();
     }   catch (SQLException ex) {
             Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {

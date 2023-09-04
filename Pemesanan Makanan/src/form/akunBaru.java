@@ -218,6 +218,8 @@ public class akunBaru extends javax.swing.JFrame {
                         new koki().setVisible(true);
                         this.dispose();
                     }
+                conn.close();
+                pst.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }

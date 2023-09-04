@@ -70,6 +70,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank1.setText(rs.getString(1));
             }
+            conn.close();
+            pst.close();
+            rs.close();
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -83,6 +86,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank2.setText(rs.getString(1));
             }
+            conn.close();
+            pst.close();
+            rs.close();
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -96,6 +102,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
             if(rs.next()){
                 this.labelrank3.setText(rs.getString(1));
             }
+            conn.close();
+            pst.close();
+            rs.close();
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -114,32 +123,26 @@ public class AdminPenjualan extends javax.swing.JFrame {
             // Menghitung tanggal awal minggu ini
             LocalDate firstDayOfWeek = today.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
             String firstDayOfWeekString = firstDayOfWeek.format(formatter);
-            System.out.println("minggu: "+firstDayOfWeekString);
             
             // Menghitung tanggal akhir minggu ini
             LocalDate lastDayOfWeek = today.with(TemporalAdjusters.next(java.time.DayOfWeek.SUNDAY));
             String lastDayOfWeekString = lastDayOfWeek.format(formatter);
-            System.out.println("Akhir Minggu: " + lastDayOfWeekString);
 
             // Menghitung tanggal awal bulan ini
             LocalDate firstDayOfMonth = today.with(TemporalAdjusters.firstDayOfMonth());
             String firstDayOfMonthString = firstDayOfMonth.format(formatter);
-            System.out.println("bulan: "+firstDayOfMonthString);
             
             // Menghitung tanggal akhir bulan ini
             LocalDate lastDayOfMonth = today.withDayOfMonth(today.lengthOfMonth());
             String lastDayOfMonthString = lastDayOfMonth.format(formatter);
-            System.out.println("Akhir Bulan: " + lastDayOfMonthString);
 
             // Menghitung tanggal awal tahun ini
             LocalDate firstDayOfYear = today.with(TemporalAdjusters.firstDayOfYear());
             String firstDayOfYearString = firstDayOfYear.format(formatter);
-            System.out.println("tahun: "+firstDayOfYearString);
             
             // Menghitung tanggal akhir tahun ini
             LocalDate lastDayOfYear = today.withDayOfYear(today.lengthOfYear());
             String lastDayOfYearString = lastDayOfYear.format(formatter);
-            System.out.println("Akhir Tahun: " + lastDayOfYearString);
 
             
             String hariSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) AS TOTAL FROM transaksi JOIN detail_transaksi ON transaksi.id = detail_transaksi.id_transaksi JOIN menu ON menu.id_menu = detail_transaksi.id_menu WHERE transaksi.status = 'Selesai' AND transaksi.tanggalTransaksi LIKE ?";
@@ -156,6 +159,10 @@ public class AdminPenjualan extends javax.swing.JFrame {
                     this.labelpemasukan.setText("Rp. " + totalPemasukan);
                 }
             }
+            conn.close();
+            pst.close();
+            hariRs.close();
+            
 
             
             // Query SQL untuk menghitung pemasukan minggu ini
@@ -173,6 +180,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int mingguPemasukan = mingguRs.getInt("TOTAL");
                 labelpemasukanminggu.setText("Rp. " + mingguPemasukan);
             }
+            conn.close();
+            pst.close();
+            mingguRs.close();
             // Query SQL untuk menghitung pemasukan bulan ini
             String bulanSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
                     "FROM transaksi " +
@@ -188,6 +198,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int bulanPemasukan = bulanRs.getInt("TOTAL");
                 labelpemasukanbulan.setText("Rp. " + bulanPemasukan);
             }
+            conn.close();
+            pst.close();
+            bulanRs.close();
             // Query SQL untuk menghitung pemasukan tahun ini
             String tahunSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
                     "FROM transaksi " +
@@ -203,6 +216,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int tahunPemasukan = tahunRs.getInt("TOTAL");
                 labelpemasukantahun.setText("Rp. " + tahunPemasukan);
             }
+            conn.close();
+            pst.close();
+            tahunRs.close();
            
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -220,32 +236,26 @@ public class AdminPenjualan extends javax.swing.JFrame {
             // Menghitung tanggal awal minggu ini
             LocalDate firstDayOfWeek = date.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
             String firstDayOfWeekString = firstDayOfWeek.format(formatter);
-            System.out.println("minggu: "+firstDayOfWeekString);
             
             // Menghitung tanggal akhir minggu ini
             LocalDate lastDayOfWeek = date.with(TemporalAdjusters.next(java.time.DayOfWeek.SUNDAY));
             String lastDayOfWeekString = lastDayOfWeek.format(formatter);
-            System.out.println("Akhir Minggu: " + lastDayOfWeekString);
 
             // Menghitung tanggal awal bulan ini
             LocalDate firstDayOfMonth = date.with(TemporalAdjusters.firstDayOfMonth());
             String firstDayOfMonthString = firstDayOfMonth.format(formatter);
-            System.out.println("bulan: "+firstDayOfMonthString);
             
             // Menghitung tanggal akhir bulan ini
             LocalDate lastDayOfMonth = date.withDayOfMonth(date.lengthOfMonth());
             String lastDayOfMonthString = lastDayOfMonth.format(formatter);
-            System.out.println("Akhir Bulan: " + lastDayOfMonthString);
 
             // Menghitung tanggal awal tahun ini
             LocalDate firstDayOfYear = date.with(TemporalAdjusters.firstDayOfYear());
             String firstDayOfYearString = firstDayOfYear.format(formatter);
-            System.out.println("tahun: "+firstDayOfYearString);
             
             // Menghitung tanggal akhir tahun ini
             LocalDate lastDayOfYear = date.withDayOfYear(date.lengthOfYear());
             String lastDayOfYearString = lastDayOfYear.format(formatter);
-            System.out.println("Akhir Tahun: " + lastDayOfYearString);
 
             
             String hariSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) AS TOTAL FROM transaksi JOIN detail_transaksi ON transaksi.id = detail_transaksi.id_transaksi JOIN menu ON menu.id_menu = detail_transaksi.id_menu WHERE transaksi.status = 'Selesai' AND transaksi.tanggalTransaksi LIKE ?";
@@ -262,6 +272,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                     this.labelpemasukan.setText("Rp. " + totalPemasukan);
                 }
             }
+            conn.close();
+            pst.close();
+            hariRs.close();
 
             
             // Query SQL untuk menghitung pemasukan minggu ini
@@ -279,6 +292,10 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int mingguPemasukan = mingguRs.getInt("TOTAL");
                 labelpemasukanminggu.setText("Rp. " + mingguPemasukan);
             }
+            conn.close();
+            pst.close();
+            mingguRs.close();
+            
             // Query SQL untuk menghitung pemasukan bulan ini
             String bulanSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
                     "FROM transaksi " +
@@ -294,6 +311,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int bulanPemasukan = bulanRs.getInt("TOTAL");
                 labelpemasukanbulan.setText("Rp. " + bulanPemasukan);
             }
+            conn.close();
+            pst.close();
+            bulanRs.close();
             // Query SQL untuk menghitung pemasukan tahun ini
             String tahunSql = "SELECT SUM(detail_transaksi.jumlah * menu.harga) as TOTAL " +
                     "FROM transaksi " +
@@ -309,6 +329,9 @@ public class AdminPenjualan extends javax.swing.JFrame {
                 int tahunPemasukan = tahunRs.getInt("TOTAL");
                 labelpemasukantahun.setText("Rp. " + tahunPemasukan);
             }
+            conn.close();
+            pst.close();
+            tahunRs.close();
            
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -398,8 +421,6 @@ public class AdminPenjualan extends javax.swing.JFrame {
             int randomNumberlast = generateRandomNumber();
             double convertedNumberfirst = (double) randomNumberfirst;
             double convertedNumberlast = (double) randomNumberlast;
-            System.out.println(convertedNumberfirst);
-            System.out.println(convertedNumberlast);
             String month = r.getString("Bulan");
             double amount = r.getDouble("Total");
             lists.add(new ModelData(month, amount, convertedNumberfirst, convertedNumberlast));
@@ -413,8 +434,6 @@ public class AdminPenjualan extends javax.swing.JFrame {
             int randomNumberfour = generateRandomNumber();
             double convertedNumberthird = (double) randomNumberthird;
             double convertedNumberfour = (double) randomNumberfour;
-            System.out.println(convertedNumberthird);
-            System.out.println(convertedNumberfour);
             chart.addData(new ModelChart(d.getMonth(), new double[]{d.getAmount(), convertedNumberthird, convertedNumberfour}));
         }
         // Start to show data with animation
