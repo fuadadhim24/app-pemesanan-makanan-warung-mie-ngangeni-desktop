@@ -37,6 +37,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.Timer;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  *
  * @author fuada
@@ -625,11 +629,26 @@ public class AdminKaryawan extends javax.swing.JFrame {
         displaygambar.setIcon(null);
         displaygambar.setVisible(false);
     }
+    private void removeFocusFromAllObjects(Container container) {
+    container.setFocusable(false);
+    for (Component child : container.getComponents()) {
+        if (child instanceof Container) {
+            removeFocusFromAllObjects((Container) child);
+        } else {
+            child.setFocusable(false);
+        }
+    }
+}
+    
     
     
     public AdminKaryawan() {
         initComponents();
         popupclose();
+        verifikatorScanRfId.setText("0");
+        scannik.setVisible(false);
+        popupScanWait.setVisible(false);
+        btnclosepopup.setVisible(false);
         labelhelpedittutup();
         tampilanbtneditfalse();
         tampilanbtnhapusfalse();
@@ -722,6 +741,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scannik = new javax.swing.JTextField();
+        btnclosepopup = new javax.swing.JPanel();
+        popupScanWait = new javax.swing.JLabel();
         btnDirectWA = new javax.swing.JPanel();
         popupclose = new javax.swing.JPanel();
         popuptxtnama = new javax.swing.JLabel();
@@ -756,12 +778,13 @@ public class AdminKaryawan extends javax.swing.JFrame {
         inputnowa = new javax.swing.JTextField();
         inputnik = new javax.swing.JTextField();
         btnwaiter = new javax.swing.JPanel();
-        btnkoki = new javax.swing.JPanel();
         btnkasir = new javax.swing.JPanel();
+        btnkoki = new javax.swing.JPanel();
         btnjabatanclose = new javax.swing.JPanel();
-        popupjabatan = new javax.swing.JLabel();
         btnEditIniEdit = new javax.swing.JPanel();
         btnCancelInEdit = new javax.swing.JPanel();
+        popupjabatan = new javax.swing.JLabel();
+        labelTambahRfId = new javax.swing.JLabel();
         btnjabatan = new javax.swing.JLabel();
         btnjabatan2 = new javax.swing.JPanel();
         PopUpEdit = new javax.swing.JLabel();
@@ -891,10 +914,47 @@ public class AdminKaryawan extends javax.swing.JFrame {
         krywn1 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         gambarTextField = new javax.swing.JLabel();
+        inputRfID = new javax.swing.JTextField();
+        verifikatorScanRfId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scannik.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        scannik.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        scannik.setHighlighter(null);
+        scannik.setSelectionColor(new java.awt.Color(255, 255, 255));
+        scannik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scannikActionPerformed(evt);
+            }
+        });
+        getContentPane().add(scannik, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 490, 220, -1));
+
+        btnclosepopup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnclosepopup.setOpaque(false);
+        btnclosepopup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnclosepopupMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnclosepopupLayout = new javax.swing.GroupLayout(btnclosepopup);
+        btnclosepopup.setLayout(btnclosepopupLayout);
+        btnclosepopupLayout.setHorizontalGroup(
+            btnclosepopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        btnclosepopupLayout.setVerticalGroup(
+            btnclosepopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(btnclosepopup, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, 70, 70));
+
+        popupScanWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login/menunggu scan.png"))); // NOI18N
+        getContentPane().add(popupScanWait, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -270, -1, -1));
 
         btnDirectWA.setOpaque(false);
         btnDirectWA.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1127,28 +1187,33 @@ public class AdminKaryawan extends javax.swing.JFrame {
         getContentPane().add(popup, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(displaygambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 100, 130));
+        jPanel1.setLayout(null);
+        jPanel1.add(displaygambar);
+        displaygambar.setBounds(250, 130, 100, 130);
 
         labelnamakaryawan.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 13)); // NOI18N
         labelnamakaryawan.setText("Nama Karyawan");
         labelnamakaryawan.setOpaque(true);
-        jPanel1.add(labelnamakaryawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, -1, -1));
+        jPanel1.add(labelnamakaryawan);
+        labelnamakaryawan.setBounds(400, 330, 109, 18);
 
         labelnik.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 13)); // NOI18N
         labelnik.setText("NIK/ID");
         labelnik.setOpaque(true);
-        jPanel1.add(labelnik, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+        jPanel1.add(labelnik);
+        labelnik.setBounds(400, 390, 44, 18);
 
         labelusername.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 13)); // NOI18N
         labelusername.setText("Username");
         labelusername.setOpaque(true);
-        jPanel1.add(labelusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, -1, -1));
+        jPanel1.add(labelusername);
+        labelusername.setBounds(400, 450, 67, 18);
 
         labelnowa.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 13)); // NOI18N
         labelnowa.setText("No Whatsapp");
         labelnowa.setOpaque(true);
-        jPanel1.add(labelnowa, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, -1, -1));
+        jPanel1.add(labelnowa);
+        labelnowa.setBounds(400, 510, 91, 18);
 
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel3.setOpaque(false);
@@ -1169,7 +1234,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 56, 48));
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(0, 70, 56, 48);
 
         jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel4.setOpaque(false);
@@ -1190,7 +1256,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, 56, 48));
+        jPanel1.add(jPanel4);
+        jPanel4.setBounds(0, 145, 56, 48);
 
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel5.setOpaque(false);
@@ -1206,7 +1273,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 56, 48));
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(0, 220, 56, 48);
 
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.setOpaque(false);
@@ -1227,7 +1295,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 288, 56, 48));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 288, 56, 48);
 
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel6.setOpaque(false);
@@ -1248,7 +1317,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 56, 48));
+        jPanel1.add(jPanel6);
+        jPanel6.setBounds(0, 690, 56, 48);
 
         inputusername.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         inputusername.setForeground(new java.awt.Color(255, 102, 102));
@@ -1272,7 +1342,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 inputusernameActionPerformed(evt);
             }
         });
-        jPanel1.add(inputusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 310, 40));
+        jPanel1.add(inputusername);
+        inputusername.setBounds(140, 440, 310, 40);
 
         inputnama.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         inputnama.setForeground(new java.awt.Color(255, 102, 102));
@@ -1297,7 +1368,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 inputnamaActionPerformed(evt);
             }
         });
-        jPanel1.add(inputnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 310, 40));
+        jPanel1.add(inputnama);
+        inputnama.setBounds(140, 320, 310, 40);
 
         inputnowa.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         inputnowa.setForeground(new java.awt.Color(255, 102, 102));
@@ -1321,7 +1393,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 inputnowaActionPerformed(evt);
             }
         });
-        jPanel1.add(inputnowa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 320, 40));
+        jPanel1.add(inputnowa);
+        inputnowa.setBounds(140, 500, 320, 40);
 
         inputnik.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         inputnik.setForeground(new java.awt.Color(255, 102, 102));
@@ -1345,13 +1418,15 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 inputnikActionPerformed(evt);
             }
         });
-        jPanel1.add(inputnik, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 310, 40));
+        jPanel1.add(inputnik);
+        inputnik.setBounds(140, 380, 310, 40);
 
         labelnama1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelnama1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelnama1.setToolTipText("");
         labelnama1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(labelnama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 8, 670, 20));
+        jPanel1.add(labelnama1);
+        labelnama1.setBounds(440, 8, 670, 20);
 
         btnwaiter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnwaiter.setOpaque(false);
@@ -1372,28 +1447,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnwaiter, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 650, 350, 28));
-
-        btnkoki.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnkoki.setOpaque(false);
-        btnkoki.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnkokiMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnkokiLayout = new javax.swing.GroupLayout(btnkoki);
-        btnkoki.setLayout(btnkokiLayout);
-        btnkokiLayout.setHorizontalGroup(
-            btnkokiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-        btnkokiLayout.setVerticalGroup(
-            btnkokiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 27, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(btnkoki, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 623, 350, 27));
+        jPanel1.add(btnwaiter);
+        btnwaiter.setBounds(122, 650, 350, 28);
 
         btnkasir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnkasir.setOpaque(false);
@@ -1414,7 +1469,30 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnkasir, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 595, 350, 28));
+        jPanel1.add(btnkasir);
+        btnkasir.setBounds(122, 593, 350, 28);
+
+        btnkoki.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnkoki.setOpaque(false);
+        btnkoki.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnkokiMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnkokiLayout = new javax.swing.GroupLayout(btnkoki);
+        btnkoki.setLayout(btnkokiLayout);
+        btnkokiLayout.setHorizontalGroup(
+            btnkokiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+        btnkokiLayout.setVerticalGroup(
+            btnkokiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 27, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(btnkoki);
+        btnkoki.setBounds(122, 622, 350, 27);
 
         btnjabatanclose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnjabatanclose.setOpaque(false);
@@ -1435,10 +1513,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnjabatanclose, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 560, 350, 30));
-
-        popupjabatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ADMIN MIE NGANGENI/popupjabatan.png"))); // NOI18N
-        jPanel1.add(popupjabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 552, 460, 130));
+        jPanel1.add(btnjabatanclose);
+        btnjabatanclose.setBounds(122, 558, 350, 30);
 
         btnEditIniEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditIniEdit.setOpaque(false);
@@ -1456,10 +1532,11 @@ public class AdminKaryawan extends javax.swing.JFrame {
         );
         btnEditIniEditLayout.setVerticalGroup(
             btnEditIniEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnEditIniEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 660, 180, 70));
+        jPanel1.add(btnEditIniEdit);
+        btnEditIniEdit.setBounds(300, 664, 180, 60);
 
         btnCancelInEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelInEdit.setOpaque(false);
@@ -1477,10 +1554,31 @@ public class AdminKaryawan extends javax.swing.JFrame {
         );
         btnCancelInEditLayout.setVerticalGroup(
             btnCancelInEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnCancelInEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 660, 180, 70));
+        jPanel1.add(btnCancelInEdit);
+        btnCancelInEdit.setBounds(110, 664, 180, 60);
+
+        popupjabatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ADMIN MIE NGANGENI/popupjabatan.png"))); // NOI18N
+        jPanel1.add(popupjabatan);
+        popupjabatan.setBounds(23, 455, 550, 323);
+
+        labelTambahRfId.setText("ingin menambahkan rf id?");
+        labelTambahRfId.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelTambahRfId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelTambahRfIdMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                labelTambahRfIdMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelTambahRfIdMouseExited(evt);
+            }
+        });
+        jPanel1.add(labelTambahRfId);
+        labelTambahRfId.setBounds(225, 618, 270, 16);
 
         btnjabatan.setBackground(new java.awt.Color(255, 255, 255));
         btnjabatan.setFont(new java.awt.Font("Microsoft YaHei", 1, 16)); // NOI18N
@@ -1493,7 +1591,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
                 btnjabatanMouseClicked(evt);
             }
         });
-        jPanel1.add(btnjabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 560, 310, 30));
+        jPanel1.add(btnjabatan);
+        btnjabatan.setBounds(126, 560, 310, 30);
 
         btnjabatan2.setOpaque(false);
         btnjabatan2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1513,10 +1612,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 37, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnjabatan2, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 557, 35, 37));
+        jPanel1.add(btnjabatan2);
+        btnjabatan2.setBounds(437, 557, 35, 37);
 
         PopUpEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ADMIN MIE NGANGENI/button edit karyawan.png"))); // NOI18N
-        jPanel1.add(PopUpEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, -1));
+        jPanel1.add(PopUpEdit);
+        PopUpEdit.setBounds(50, 645, 501, 80);
 
         submit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submit.setOpaque(false);
@@ -1537,7 +1638,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel1.add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 660, 180, 60));
+        jPanel1.add(submit);
+        submit.setBounds(210, 660, 180, 60);
 
         pilihgambar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pilihgambar.setOpaque(false);
@@ -1558,7 +1660,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(pilihgambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 340, 30));
+        jPanel1.add(pilihgambar);
+        pilihgambar.setBounds(130, 270, 340, 30);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -3009,13 +3112,27 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel13);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 795, 550));
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(550, 170, 795, 550);
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ADMIN MIE NGANGENI/3.png"))); // NOI18N
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        jPanel1.add(gambarTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 140, 30));
+        jPanel1.add(background);
+        background.setBounds(0, 0, 1366, 768);
+        jPanel1.add(gambarTextField);
+        gambarTextField.setBounds(700, 230, 140, 30);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        inputRfID.setText("jTextField1");
+        inputRfID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputRfIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(inputRfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+
+        verifikatorScanRfId.setText("jTextField1");
+        getContentPane().add(verifikatorScanRfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
 
         setSize(new java.awt.Dimension(1366, 768));
         setLocationRelativeTo(null);
@@ -3157,72 +3274,142 @@ public class AdminKaryawan extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void submitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitMouseClicked
-        /*try{
-            
-            InputStream is = new FileInputStream(new File(s));
+    boolean checkRfId = labelTambahRfId.getText()=="ingin menambahkan rf id?";
+        if(checkRfId==true){
+            java.sql.Connection conn = null;
+            try {
+            // Baca data dari JTextField
+            String nik = inputnik.getText();
+            String nama = inputnama.getText();
+            String username = inputusername.getText();
+            String noWa = inputnowa.getText();
             String jabatan = btnjabatan.getText();
             String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
-            String sql = "INSERT INTO `akun` (`username`, `password`, `hak_akses`) VALUES ('"+inputusername.getText()+"', NULL, '"+tanpaspasijabatan+"');";
-            String sql1 = "INSERT INTO `detail_akun` (`username`, `nama`, `no_wa`, `nik`,`foto`) VALUES ('"+inputusername.getText()+"', '"+inputnama.getText()+"', '"+inputnowa.getText()+"', '"+inputnik.getText()+"',?);";
-            java.sql.Connection conn = (Connection)Config.configDB();
+            String filename = gambarTextField.getText();
+
+            // Memeriksa apakah semua kolom telah diisi
+            if (nik.isEmpty() || nama.isEmpty() || username.isEmpty() || noWa.isEmpty() || filename.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Semua kolom harus diisi.");
+                return; // Keluar dari metode jika ada kolom yang kosong
+            }
+
+
+            // Baca file gambar ke dalam byte array
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            byte[] imageBytes = new byte[(int) file.length()];
+            fis.read(imageBytes);
+            fis.close();
+
+            // Koneksi ke database
+            conn = (Connection)Config.configDB();
+
+            // Memulai transaksi
+            conn.setAutoCommit(false);
+
+            // Siapkan statement untuk insert data ke tabel
+            String sql = "INSERT INTO `akun` (`nik/id`, `username`, `password`, `hak_akses`) VALUES ('"+nik+"', '"+username+"', NULL, '"+tanpaspasijabatan+"');";
+            String sql1 = "INSERT INTO `detail_akun` (`nik/id`, `nama`, `no_wa`, `foto`) VALUES (?, ?, ?, ?);";
+
             java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
             java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
-            pstm1.setBlob(5, is);
+            pstm1.setString(1, nik);
+            pstm1.setString(2, nama);
+            pstm1.setString(3, noWa);
+            pstm1.setBytes(4, imageBytes);
+
+            // Jalankan statement
             pstm.executeUpdate();
             pstm1.executeUpdate();
-            
-            
-            JOptionPane.showMessageDialog(null, "Proses Simpan Data Berhasil.. Silahkan login kembali menggunakan username: "+inputusername.getText()+" dan kosongkan password ");
-            
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }*/
-        try {
-        // Baca data dari JTextField
-        String nik = inputnik.getText();
-        String nama = inputnama.getText();
-        String username = inputusername.getText();
-        String noWa = inputnowa.getText();
-        String jabatan = btnjabatan.getText();
-        String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
-        String filename = gambarTextField.getText();
-        
 
-        // Baca file gambar ke dalam byte array
-        File file = new File(filename);
-        FileInputStream fis = new FileInputStream(file);
-        byte[] imageBytes = new byte[(int) file.length()];
-        fis.read(imageBytes);
-        fis.close();
+            // Commit transaksi jika tidak ada kesalahan
+            conn.commit();
 
-        // Koneksi ke database
-        
+            JOptionPane.showMessageDialog(null, "Data berhasil diupload ke database");
+            kosongkanform();
+            tampilkandata();
 
-        // Siapkan statement untuk insert data ke tabel
-        String sql = "INSERT INTO `akun` (`nik/id`, `username`, `password`, `hak_akses`) VALUES ('"+nik+"', '"+username+"', NULL, '"+tanpaspasijabatan+"');";
-        String sql1 = "INSERT INTO `detail_akun` (`nik/id`, `nama`, `no_wa`, `foto`) VALUES (?, ?, ?, ?);";
-        java.sql.Connection conn = (Connection)Config.configDB();
-        java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
-        java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        pstm1.setString(1, nik);
-        pstm1.setString(2, nama);
-        pstm1.setString(3, noWa);
-        pstm1.setBytes(4, imageBytes);
-
-        // Jalankan statement
-        pstm.executeUpdate();
-        pstm1.executeUpdate();
-        
-        JOptionPane.showMessageDialog(null, "Data berhasil diupload ke database");
-        kosongkanform();
-        tampilkandata();
-        
-           
             pstm1.close();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
-    }
+            pstm.close();
+
+        } catch (Exception e) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminKaryawan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
+        }
+        }else if(checkRfId==false){
+            java.sql.Connection conn = null;
+            try {
+            // Baca data dari JTextField
+            String nik = inputnik.getText();
+            String nama = inputnama.getText();
+            String username = inputusername.getText();
+            String noWa = inputnowa.getText();
+            String jabatan = btnjabatan.getText();
+            String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
+            String filename = gambarTextField.getText();
+            String rfId = null;
+            rfId = inputRfID.getText();
+
+            // Memeriksa apakah semua kolom telah diisi
+            if (nik.isEmpty() || nama.isEmpty() || username.isEmpty() || noWa.isEmpty() || filename.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Semua kolom harus diisi.");
+                return; // Keluar dari metode jika ada kolom yang kosong
+            }
+
+
+            // Baca file gambar ke dalam byte array
+            File file = new File(filename);
+            FileInputStream fis = new FileInputStream(file);
+            byte[] imageBytes = new byte[(int) file.length()];
+            fis.read(imageBytes);
+            fis.close();
+
+            // Koneksi ke database
+            conn = (Connection)Config.configDB();
+
+            // Memulai transaksi
+            conn.setAutoCommit(false);
+
+            // Siapkan statement untuk insert data ke tabel
+            String sql = "INSERT INTO `akun` (`nik/id`, `username`, `password`, `hak_akses`) VALUES ('"+nik+"', '"+username+"', NULL, '"+tanpaspasijabatan+"');";
+            String sql1 = "INSERT INTO `detail_akun` (`nik/id`, `nama`, `no_wa`, `foto`,`rf_id`) VALUES (?, ?, ?, ?);";
+
+            java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
+            java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
+            pstm1.setString(1, nik);
+            pstm1.setString(2, nama);
+            pstm1.setString(3, noWa);
+            pstm1.setBytes(4, imageBytes);
+            pstm1.setString(5, rfId);
+
+            // Jalankan statement
+            pstm.executeUpdate();
+            pstm1.executeUpdate();
+
+            // Commit transaksi jika tidak ada kesalahan
+            conn.commit();
+
+            JOptionPane.showMessageDialog(null, "Data berhasil diupload ke database");
+            kosongkanform();
+            tampilkandata();
+
+            pstm1.close();
+            pstm.close();
+
+        } catch (Exception e) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminKaryawan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
+        }
+            
+        }
 
     }//GEN-LAST:event_submitMouseClicked
 
@@ -3441,74 +3628,104 @@ public class AdminKaryawan extends javax.swing.JFrame {
         PopUpEdit.setVisible(false);
         btnEditIniEdit.setVisible(false);
         btnCancelInEdit.setVisible(false);
-        inputnik.setFocusable(true);
+        scannik.setText(null);
+        labelTambahRfId.setText(null);
+        labelTambahRfId.setText("ingin menambahkan rf id?");
+        inputRfID.setText(null);
     }//GEN-LAST:event_btnCancelInEditMouseClicked
 
     private void btnEditIniEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditIniEditMouseClicked
-        /*try{
+    boolean checkRfId = labelTambahRfId.getText()=="ingin menambahkan rf id?";
+    if(checkRfId==true){
+        try {
+            String jabatan = btnjabatan.getText();
+            String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
             ImageIcon imageIcon = (ImageIcon) displaygambar.getIcon();
             Image image = imageIcon.getImage();
 
             // Mengubah gambar menjadi format byte array
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write((RenderedImage) image, "jpg", baos);
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(image, 0, 0, null);
+            g2d.dispose();
+            ImageIO.write(bufferedImage, "jpg", baos);
             byte[] fotoBytes = baos.toByteArray();
-            
+
             // Membuat query SQL untuk mengupdate data di database
-            String sql = "UPDATE `akun` SET `username` = '"+inputusername.getText()+"', `hak_akses` = '"+btnjabatan.getText()+"' WHERE `akun`.`nik` = '"+inputnik.getText()+"';";
-            String sql1 = "UPDATE `detail_akun` SET `nama` = '"+inputnama.getText()+"', `no_wa` = '"+inputnowa.getText()+"', `foto` = "+fotoBytes+" WHERE `detail_akun`.`nik` = '"+inputnik.getText()+"';";
-            java.sql.Connection conn = (Connection)Config.configDB();
+            String sql = "UPDATE `akun` SET `username` = '"+inputusername.getText()+"', `hak_akses` = '" + tanpaspasijabatan + "' WHERE `akun`.`nik/id` = '" + inputnik.getText() + "';";
+            String sql1 = "UPDATE `detail_akun` SET `nama` = '" + inputnama.getText() + "', `no_wa` = '" + inputnowa.getText() + "', `foto` = ? WHERE `detail_akun`.`nik/id` = '" + inputnik.getText() + "';";  
+            java.sql.Connection conn = (Connection) Config.configDB();
             java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
             java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
+
+            // Mengatur parameter untuk gambar sebagai byte array
+            pstm1.setBytes(1, fotoBytes);
+
             // Menjalankan perintah update
             pstm.executeUpdate();
             pstm1.executeUpdate();
             JOptionPane.showMessageDialog(null, "Edit Data Berhasil...");
-            
+
             labelhelpedittutup();
-            inputnik.setFocusable(true);
-        }catch(Exception e ){
-            System.err.println(e.getMessage());
-        }*/
-        try {
-        String jabatan = btnjabatan.getText();
-        String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
-        ImageIcon imageIcon = (ImageIcon) displaygambar.getIcon();
-        Image image = imageIcon.getImage();
 
-        // Mengubah gambar menjadi format byte array
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = bufferedImage.createGraphics();
-        g2d.drawImage(image, 0, 0, null);
-        g2d.dispose();
-        ImageIO.write(bufferedImage, "jpg", baos);
-        byte[] fotoBytes = baos.toByteArray();
+            tampilkandata();
+            kosongkanform();
 
-        // Membuat query SQL untuk mengupdate data di database
-        String sql = "UPDATE `akun` SET `username` = '"+inputusername.getText()+"', `hak_akses` = '" + tanpaspasijabatan + "' WHERE `akun`.`nik/id` = '" + inputnik.getText() + "';";
-        String sql1 = "UPDATE `detail_akun` SET `nama` = '" + inputnama.getText() + "', `no_wa` = '" + inputnowa.getText() + "', `foto` = ? WHERE `detail_akun`.`nik/id` = '" + inputnik.getText() + "';";  
-        java.sql.Connection conn = (Connection) Config.configDB();
-        java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
-        java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
-        
-        // Mengatur parameter untuk gambar sebagai byte array
-        pstm1.setBytes(1, fotoBytes);
 
-        // Menjalankan perintah update
-        pstm.executeUpdate();
-        pstm1.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Edit Data Berhasil...");
-
-        labelhelpedittutup();
-        
-        tampilkandata();
-        kosongkanform();
-        
-       
-        pstm1.close();
+            pstm1.close();
+            scannik.setText(null);
+            inputRfID.setText(null);
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("ingin menambahkan rf id?");
     } catch (Exception e) {
         System.err.println(e.getMessage());
+    }}else if(checkRfId==false){
+        try {
+            String jabatan = btnjabatan.getText();
+            String tanpaspasijabatan = jabatan.replaceAll("\\s+", "");
+            ImageIcon imageIcon = (ImageIcon) displaygambar.getIcon();
+            Image image = imageIcon.getImage();
+
+            // Mengubah gambar menjadi format byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(image, 0, 0, null);
+            g2d.dispose();
+            ImageIO.write(bufferedImage, "jpg", baos);
+            byte[] fotoBytes = baos.toByteArray();
+
+            // Membuat query SQL untuk mengupdate data di database
+            String sql = "UPDATE `akun` SET `username` = '"+inputusername.getText()+"', `hak_akses` = '" + tanpaspasijabatan + "' WHERE `akun`.`nik/id` = '" + inputnik.getText() + "';";
+            String sql1 = "UPDATE `detail_akun` SET `rf_id` ='"+inputRfID.getText()+"', `nama` = '" + inputnama.getText() + "', `no_wa` = '" + inputnowa.getText() + "', `foto` = ? WHERE `detail_akun`.`nik/id` = '" + inputnik.getText() + "';";  
+            java.sql.Connection conn = (Connection) Config.configDB();
+            java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
+            java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
+
+            // Mengatur parameter untuk gambar sebagai byte array
+            pstm1.setBytes(1, fotoBytes);
+
+            // Menjalankan perintah update
+            pstm.executeUpdate();
+            pstm1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Edit Data Berhasil...");
+
+            labelhelpedittutup();
+
+            tampilkandata();
+            kosongkanform();
+
+
+            pstm1.close();
+            scannik.setText(null);
+            inputRfID.setText(null);
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("ingin menambahkan rf id?");
+    } catch (Exception e) {
+        System.err.println(e.getMessage());
+    }
+        
     }
     }//GEN-LAST:event_btnEditIniEditMouseClicked
 
@@ -5844,6 +6061,83 @@ public class AdminKaryawan extends javax.swing.JFrame {
         btnwaiter.setVisible(true);}
     }//GEN-LAST:event_btnjabatan2MouseClicked
 
+    private void labelTambahRfIdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelTambahRfIdMouseEntered
+        int nilai = Integer.parseInt(verifikatorScanRfId.getText());
+        if(nilai==0){    
+            labelTambahRfId.setFont(labelTambahRfId.getFont().deriveFont(Font.BOLD)); // Mengatur font dengan garis bawah saat hover        
+        }
+    }//GEN-LAST:event_labelTambahRfIdMouseEntered
+
+    private void labelTambahRfIdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelTambahRfIdMouseExited
+        int nilai = Integer.parseInt(verifikatorScanRfId.getText());
+        if(nilai==0){    
+            labelTambahRfId.setFont(labelTambahRfId.getFont().deriveFont(Font.PLAIN));
+        }
+    }//GEN-LAST:event_labelTambahRfIdMouseExited
+
+    private void labelTambahRfIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelTambahRfIdMouseClicked
+        verifikatorScanRfId.setText("1");
+        removeFocusFromAllObjects(inputnama);
+        removeFocusFromAllObjects(inputnik);
+        removeFocusFromAllObjects(inputnowa);
+        removeFocusFromAllObjects(inputusername);
+        removeFocusFromAllObjects(labelTambahRfId);
+        labelTambahRfId.setFont(labelTambahRfId.getFont().deriveFont(Font.PLAIN)); // Mengembalikan ke font awal setelah keluar dari hover
+        
+        scannik.setVisible(true);
+        popupScanWait.setVisible(true);
+        btnclosepopup.setVisible(true);
+        
+        
+    }//GEN-LAST:event_labelTambahRfIdMouseClicked
+
+    private void btnclosepopupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnclosepopupMouseClicked
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("ingin menambahkan rf id?");
+            inputRfID.setText(null);
+            scannik.setVisible(false);
+            popupScanWait.setVisible(false);
+            btnclosepopup.setVisible(false);
+            scannik.setText(null);
+            inputusername.setFocusable(true);
+            inputnik.setFocusable(true);
+            inputnowa.setFocusable(true);
+            inputnama.setFocusable(true);
+            labelTambahRfId.setFocusable(true);
+            verifikatorScanRfId.setText("0");
+    }//GEN-LAST:event_btnclosepopupMouseClicked
+
+    private void scannikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scannikActionPerformed
+        if(scannik.getText()!=null){
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("Rf Id :" +scannik.getText()+"     Tekan Untuk Ubah");
+            inputRfID.setText(null);
+            inputRfID.setText(scannik.getText());
+            scannik.setVisible(false);
+            popupScanWait.setVisible(false);
+            btnclosepopup.setVisible(false);
+            scannik.setText(null);
+        }else if(scannik.getText()==null){
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("ingin menambahkan rf id?");
+            inputRfID.setText(null);
+            scannik.setVisible(false);
+            popupScanWait.setVisible(false);
+            btnclosepopup.setVisible(false);
+            scannik.setText(null);
+        }
+        inputusername.setFocusable(true);
+        inputnik.setFocusable(true);
+        inputnowa.setFocusable(true);
+        inputnama.setFocusable(true);
+        labelTambahRfId.setFocusable(true);
+        
+    }//GEN-LAST:event_scannikActionPerformed
+
+    private void inputRfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputRfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputRfIDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5889,6 +6183,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
     private javax.swing.JPanel btnCancelInEdit;
     private javax.swing.JPanel btnDirectWA;
     private javax.swing.JPanel btnEditIniEdit;
+    private javax.swing.JPanel btnclosepopup;
     private javax.swing.JPanel btnedit1;
     private javax.swing.JPanel btnedit10;
     private javax.swing.JPanel btnedit11;
@@ -5997,6 +6292,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
     private javax.swing.JLabel displaygambar8;
     private javax.swing.JLabel displaygambar9;
     private javax.swing.JLabel gambarTextField;
+    private javax.swing.JTextField inputRfID;
     private javax.swing.JTextField inputnama;
     private javax.swing.JTextField inputnik;
     private javax.swing.JTextField inputnowa;
@@ -6034,6 +6330,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
     private javax.swing.JLabel krywn7;
     private javax.swing.JLabel krywn8;
     private javax.swing.JLabel krywn9;
+    private javax.swing.JLabel labelTambahRfId;
     public static final javax.swing.JLabel labelnama1 = new javax.swing.JLabel();
     private javax.swing.JLabel labelnamakaryawan;
     private javax.swing.JLabel labelnik;
@@ -6041,6 +6338,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
     private javax.swing.JLabel labelusername;
     private javax.swing.JPanel pilihgambar;
     private javax.swing.JPanel popup;
+    private javax.swing.JLabel popupScanWait;
     private javax.swing.JPanel popupclose;
     private javax.swing.JLabel popupdisplaygambar;
     private javax.swing.JLabel popupinfokaryawan;
@@ -6052,6 +6350,8 @@ public class AdminKaryawan extends javax.swing.JFrame {
     private javax.swing.JLabel popuptxtnik;
     private javax.swing.JLabel popuptxtnowa;
     private javax.swing.JLabel popuptxtusername;
+    private javax.swing.JTextField scannik;
     private javax.swing.JPanel submit;
+    private javax.swing.JTextField verifikatorScanRfId;
     // End of variables declaration//GEN-END:variables
 }

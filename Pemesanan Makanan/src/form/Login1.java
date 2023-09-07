@@ -72,8 +72,8 @@ public class Login1 extends javax.swing.JFrame {
         popupPemindaianBerhasil = new javax.swing.JLabel();
         popupPemindaianGagal = new javax.swing.JLabel();
         scannik = new javax.swing.JTextField();
-        popupScanWait = new javax.swing.JLabel();
         btnclosepopup = new javax.swing.JPanel();
+        popupScanWait = new javax.swing.JLabel();
         closeform = new javax.swing.JLabel();
         btnlupapassword = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
@@ -111,9 +111,6 @@ public class Login1 extends javax.swing.JFrame {
         });
         getContentPane().add(scannik, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 490, 220, -1));
 
-        popupScanWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login/menunggu scan.png"))); // NOI18N
-        getContentPane().add(popupScanWait, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -270, -1, -1));
-
         btnclosepopup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnclosepopup.setOpaque(false);
         btnclosepopup.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,6 +131,9 @@ public class Login1 extends javax.swing.JFrame {
         );
 
         getContentPane().add(btnclosepopup, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, 70, 70));
+
+        popupScanWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login/menunggu scan.png"))); // NOI18N
+        getContentPane().add(popupScanWait, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -270, -1, -1));
 
         closeform.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         closeform.setText("X");
@@ -550,185 +550,184 @@ public class Login1 extends javax.swing.JFrame {
 
     private void scannikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scannikActionPerformed
         try {
-            String sql = "SELECT * FROM akun JOIN detail_akun ON akun.`nik/id` = detail_akun.`nik/id` WHERE akun.`nik/id` = ?";
+            String sql = "SELECT * FROM akun JOIN detail_akun ON akun.`nik/id` = detail_akun.`nik/id` WHERE detail_akun.`rf_id` = ?";
             java.sql.Connection conn = (Connection) Config.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pst.setString(1, scannik.getText());
             java.sql.ResultSet rs = pst.executeQuery();
-            System.out.println(scannik.getText());
 
             if (rs.next()) {
-                String storedPassword = rs.getString("password");
-                String userRole = rs.getString("hak_akses");
-                
-                if (storedPassword == null || storedPassword.isEmpty()) {
-                    com.mysql.cj.jdbc.Blob gambarBlob = (com.mysql.cj.jdbc.Blob) rs.getBlob("foto");
-                    System.out.println("check 3 berhasil");
-                    if (gambarBlob != null) {
-                        System.out.println("check 4 berhasil");
-                        int ukuran = (int) gambarBlob.length();
+                String checkRfId = rs.getString("rf_id");
+                if(checkRfId=="0" || checkRfId == null){
+                    JOptionPane.showMessageDialog(this, "Akun Anda Tidak Terdaftar RF ID");
+                }else{
+                    String storedPassword = rs.getString("password");
+                    String userRole = rs.getString("hak_akses");
 
-                        int targetWidth = 66;  // Lebar yang diinginkan
-                        int targetHeight = 66;  // Tinggi yang diinginkan
+                    if (storedPassword == null || storedPassword.isEmpty()) {
+                        com.mysql.cj.jdbc.Blob gambarBlob = (com.mysql.cj.jdbc.Blob) rs.getBlob("foto");
+                        if (gambarBlob != null) {
+                            int ukuran = (int) gambarBlob.length();
 
-                        ImageIcon ic = new ImageIcon(gambarBlob.getBytes(1, ukuran));
-                        Image image = ic.getImage();
+                            int targetWidth = 66;  // Lebar yang diinginkan
+                            int targetHeight = 66;  // Tinggi yang diinginkan
 
-                        // Mendapatkan lebar dan tinggi asli foto
-                        int originalWidth = image.getWidth(null);
-                        int originalHeight = image.getHeight(null);
+                            ImageIcon ic = new ImageIcon(gambarBlob.getBytes(1, ukuran));
+                            Image image = ic.getImage();
 
-                        // Menghitung aspek rasio gambar asli
-                        double aspectRatio = (double) originalWidth / originalHeight;
+                            // Mendapatkan lebar dan tinggi asli foto
+                            int originalWidth = image.getWidth(null);
+                            int originalHeight = image.getHeight(null);
 
-                        // Menghitung ukuran yang sesuai dengan aspek rasio yang diinginkan
-                        int scaledWidth, scaledHeight;
-                        if (aspectRatio > 1) {  // Gambar lebih lebar
-                            scaledWidth = targetWidth;
-                            scaledHeight = (int) (targetWidth / aspectRatio);
-                        } else {  // Gambar lebih tinggi atau persegi
-                            scaledWidth = (int) (targetHeight * aspectRatio);
-                            scaledHeight = targetHeight;
-                        }
+                            // Menghitung aspek rasio gambar asli
+                            double aspectRatio = (double) originalWidth / originalHeight;
 
-                        // Mengubah ukuran gambar tanpa memotong
-                        Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_DEFAULT);
-
-                        // Mengubah Image menjadi ImageIcon
-                        ImageIcon icon = new ImageIcon(scaledImage);
-                        
-                        
-                        
-                        popupPemindaianBerhasil.setVisible(true);
-                        System.out.println("check 5 berhasil");
-                        akunBaru.username.setText(rs.getString(2)+"!");
-                        akunBaru.job.setText(rs.getString(4));
-                        AdminPenjualan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminKaryawan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminMenu.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminPesanan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        koki.labelnama.setText(rs.getString(6));
-                        koki.displaygambarakun.setIcon(icon);
-                        waiter.labelnama.setText(rs.getString(6));
-                        waiter.displaygambarakun.setIcon(icon);
-                        System.out.println("check 6 berhasil");
-                        
-                        Thread.sleep(2000); // Introduce a 2-second delay
-                        new akunBaru().setVisible(true);
-                        System.out.println("check 7 berhasil");
-                        this.dispose();
-                        System.out.println("check 8 berhasil");
-                } 
-            }else if (storedPassword != null) {
-                    // Set gambar ke foto profil
-                    com.mysql.cj.jdbc.Blob gambarBlob2 = (com.mysql.cj.jdbc.Blob) rs.getBlob("foto");
-                    if (gambarBlob2 != null) {
-                        int ukuran = (int) gambarBlob2.length();
-
-                        int targetWidth = 66;  // Lebar yang diinginkan
-                        int targetHeight = 66;  // Tinggi yang diinginkan
-
-                        ImageIcon ic = new ImageIcon(gambarBlob2.getBytes(1, ukuran));
-                        Image image = ic.getImage();
-
-                        // Mendapatkan lebar dan tinggi asli foto
-                        int originalWidth = image.getWidth(null);
-                        int originalHeight = image.getHeight(null);
-                        
-                        // Menghitung aspek rasio gambar asli
-                        double aspectRatio = (double) originalWidth / originalHeight;
-
-                        // Menghitung ukuran yang sesuai dengan aspek rasio yang diinginkan
-                        int scaledWidth, scaledHeight;
-                        if (aspectRatio > 1) {  // Gambar lebih lebar
-                            scaledWidth = targetWidth;
-                            scaledHeight = (int) (targetWidth / aspectRatio);
-                        } else {  // Gambar lebih tinggi atau persegi
-                            scaledWidth = (int) (targetHeight * aspectRatio);
-                            scaledHeight = targetHeight;
-                        }
-
-                        // Mengubah ukuran gambar tanpa memotong
-                        Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_DEFAULT);
-
-                        // Mengubah Image menjadi ImageIcon
-                        ImageIcon icon = new ImageIcon(scaledImage);
-
-                        // Set the labelnama in other classes
-                        AdminPenjualan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminKaryawan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminMenu.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        AdminPesanan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
-                        koki.labelnama.setText(rs.getString(6));
-                        koki.displaygambarakun.setIcon(icon);
-                        waiter.labelnama.setText(rs.getString(6));
-                        waiter.displaygambarakun.setIcon(icon);
-                        
-                        popupPemindaianBerhasil.setVisible(true);
-                    }
-                    System.out.println(userRole);
-                    // Timer to execute the if statement after 2 seconds
-                    Timer timer = new Timer(2000, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (userRole.equals("ADMIN")) {
-                                new AdminPenjualan().setVisible(true);
-                                dispose();
-                            } else if (userRole.equals("KOKI")) {
-                                try {
-                                    new koki().setVisible(true);
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (NoSuchFieldException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (IllegalArgumentException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (IllegalAccessException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (InterruptedException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                dispose();
-                            } else if (userRole.equals("KASIR")) {
-                                new kasir().setVisible(true);
-                                dispose();
-                            } else if (userRole.equals("WAITER")) {
-                                try {
-                                    new waiter().setVisible(true);
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (NoSuchFieldException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (IllegalArgumentException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (IllegalAccessException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (InterruptedException ex) {
-                                    Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                dispose();
+                            // Menghitung ukuran yang sesuai dengan aspek rasio yang diinginkan
+                            int scaledWidth, scaledHeight;
+                            if (aspectRatio > 1) {  // Gambar lebih lebar
+                                scaledWidth = targetWidth;
+                                scaledHeight = (int) (targetWidth / aspectRatio);
+                            } else {  // Gambar lebih tinggi atau persegi
+                                scaledWidth = (int) (targetHeight * aspectRatio);
+                                scaledHeight = targetHeight;
                             }
-                        }
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                } else {
 
-                    popupPemindaianGagal.setVisible(true);
-                    // Timer to hide the popup after 2 seconds
-                    Timer timer = new Timer(2000, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            popupPemindaianGagal.setVisible(false);
+                            // Mengubah ukuran gambar tanpa memotong
+                            Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_DEFAULT);
+
+                            // Mengubah Image menjadi ImageIcon
+                            ImageIcon icon = new ImageIcon(scaledImage);
+
+
+
+                            popupPemindaianBerhasil.setVisible(true);
+                            System.out.println("check 5 berhasil");
+                            akunBaru.username.setText(rs.getString(2)+"!");
+                            akunBaru.job.setText(rs.getString(4));
+                            AdminPenjualan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminKaryawan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminMenu.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminPesanan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            koki.labelnama.setText(rs.getString(6));
+                            koki.displaygambarakun.setIcon(icon);
+                            waiter.labelnama.setText(rs.getString(6));
+                            waiter.displaygambarakun.setIcon(icon);
+
+                            Thread.sleep(2000); // Introduce a 2-second delay
+                            new akunBaru().setVisible(true);
+                            this.dispose();
+                    } 
+                }else if (storedPassword != null) {
+                        // Set gambar ke foto profil
+                        com.mysql.cj.jdbc.Blob gambarBlob2 = (com.mysql.cj.jdbc.Blob) rs.getBlob("foto");
+                        if (gambarBlob2 != null) {
+                            int ukuran = (int) gambarBlob2.length();
+
+                            int targetWidth = 66;  // Lebar yang diinginkan
+                            int targetHeight = 66;  // Tinggi yang diinginkan
+
+                            ImageIcon ic = new ImageIcon(gambarBlob2.getBytes(1, ukuran));
+                            Image image = ic.getImage();
+
+                            // Mendapatkan lebar dan tinggi asli foto
+                            int originalWidth = image.getWidth(null);
+                            int originalHeight = image.getHeight(null);
+
+                            // Menghitung aspek rasio gambar asli
+                            double aspectRatio = (double) originalWidth / originalHeight;
+
+                            // Menghitung ukuran yang sesuai dengan aspek rasio yang diinginkan
+                            int scaledWidth, scaledHeight;
+                            if (aspectRatio > 1) {  // Gambar lebih lebar
+                                scaledWidth = targetWidth;
+                                scaledHeight = (int) (targetWidth / aspectRatio);
+                            } else {  // Gambar lebih tinggi atau persegi
+                                scaledWidth = (int) (targetHeight * aspectRatio);
+                                scaledHeight = targetHeight;
+                            }
+
+                            // Mengubah ukuran gambar tanpa memotong
+                            Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_DEFAULT);
+
+                            // Mengubah Image menjadi ImageIcon
+                            ImageIcon icon = new ImageIcon(scaledImage);
+
+                            // Set the labelnama in other classes
+                            AdminPenjualan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminKaryawan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminMenu.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            AdminPesanan.labelnama1.setText("Selamat Datang, " + rs.getString(6));
+                            koki.labelnama.setText(rs.getString(6));
+                            koki.displaygambarakun.setIcon(icon);
+                            waiter.labelnama.setText(rs.getString(6));
+                            waiter.displaygambarakun.setIcon(icon);
+
+                            popupPemindaianBerhasil.setVisible(true);
                         }
-                    });
-                    timer.setRepeats(false); // Set to not repeat the action
-                    timer.start();
+                        System.out.println(userRole);
+                        // Timer to execute the if statement after 2 seconds
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                if (userRole.equals("ADMIN")) {
+                                    new AdminPenjualan().setVisible(true);
+                                    dispose();
+                                } else if (userRole.equals("KOKI")) {
+                                    try {
+                                        new koki().setVisible(true);
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (NoSuchFieldException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (IllegalArgumentException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (IllegalAccessException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    dispose();
+                                } else if (userRole.equals("KASIR")) {
+                                    new kasir().setVisible(true);
+                                    dispose();
+                                } else if (userRole.equals("WAITER")) {
+                                    try {
+                                        new waiter().setVisible(true);
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (NoSuchFieldException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (IllegalArgumentException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (IllegalAccessException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    dispose();
+                                }
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    } else {
+
+                        popupPemindaianGagal.setVisible(true);
+                        // Timer to hide the popup after 2 seconds
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                popupPemindaianGagal.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false); // Set to not repeat the action
+                        timer.start();
+                    }
+            }
+                conn.close();
+                pst.close();
+                rs.close();
                 }
-        }
-            conn.close();
-            pst.close();
-            rs.close();
     }   catch (SQLException ex) {
             Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
@@ -736,10 +735,12 @@ public class Login1 extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(Login1.class.getName()).log(Level.SEVERE, null, ex);
         }
+        scannik.setText(null);
     }//GEN-LAST:event_scannikActionPerformed
 
     private void btnclosepopupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnclosepopupMouseClicked
         popupScanWait.setVisible(false);
+        scannik.setText(null);
         scannik.setVisible(false);
     }//GEN-LAST:event_btnclosepopupMouseClicked
 

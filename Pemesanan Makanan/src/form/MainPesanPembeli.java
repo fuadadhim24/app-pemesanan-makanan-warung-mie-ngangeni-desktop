@@ -4840,7 +4840,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                     int qrCodeSize = 150; // Size of the QR Code
                     int textHeight = 50; // Height of the text 
                     String fileName = nomorPesanan;
-                    String imagePath = "C:\\Users\\fuada\\OneDrive\\Documents\\belajar\\tugas kuliah\\smstr 2\\tugas akhir\\app\\Pemesanan Makanan\\src\\qr code\\" ;
+                    String imagePath = "C:\\Users\\fuada\\Desktop\\epim\\Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001\\Pemesanan Makanan Mie Ngangeni Desktop\\Pemesanan Makanan\\src\\qr code" ;
 
                     //generate barcode
                      try {
@@ -4992,7 +4992,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                     timer.setRepeats(false); // Hanya berjalan sekali
                     timer.start();
                     
-                    imagePath = "C:\\Users\\fuada\\OneDrive\\Documents\\belajar\\tugas kuliah\\smstr 2\\tugas akhir\\app\\Pemesanan Makanan\\src\\qr code\\" + nomorPesanan + ".PNG";
+                    imagePath = "C:\\Users\\fuada\\Desktop\\epim\\Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001\\Pemesanan Makanan Mie Ngangeni Desktop\\Pemesanan Makanan\\src\\qr code" + nomorPesanan + ".PNG";
                     try {
                         printPNG(imagePath,250,333);
                         System.out.println("Printing completed.");
