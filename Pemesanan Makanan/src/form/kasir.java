@@ -56,6 +56,7 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.awt.image.BufferedImage;
+import java.awt.print.Paper;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -86,11 +87,12 @@ public class kasir extends javax.swing.JFrame {
     /**
      * Creates new form Promosi
      */
+    private JFrame frame;
     private String sql;
     
     public static void printPNG(String nomorPesanan) throws PrinterException {
         // Mendefinisikan path file PNG yang akan dicetak
-        String filePath = "C:/Users/fuada/OneDrive/Documents/belajar/tugas kuliah/smstr 2/tugas akhir/app/Pemesanan Makanan/src/qr code/" + nomorPesanan + ".png";
+        String filePath = "C:/Users/fuada/Desktop/epim/Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001/Pemesanan Makanan Mie Ngangeni Desktop/Pemesanan Makanan/src/qr code/" + nomorPesanan + ".png";
         
         // Memanggil method untuk mencetak file PNG
         printImage(filePath);
@@ -199,7 +201,7 @@ public class kasir extends javax.swing.JFrame {
     }
     
     private void scheduleHideStruk() {
-        int delay = 5000; // Penundaan sebelum menjalankan koding (dalam milidetik)
+        int delay = 8000; // Penundaan sebelum menjalankan koding (dalam milidetik)
 
         Timer timer = new Timer(delay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -212,6 +214,7 @@ public class kasir extends javax.swing.JFrame {
                 bal1.setText(null);
                 bgpesananscan.setVisible(false);
                 labelnopesanan.setVisible(false);
+                // Setelah selesai cetak, tampilkan pesan selesai
             }
         });
 
@@ -239,12 +242,11 @@ public class kasir extends javax.swing.JFrame {
     private void settampilkandata(String sql) throws SQLException {
     try {
         this.sql = sql;
-        
         java.sql.Connection conn = (Connection) Config.configDB();
         java.sql.PreparedStatement pstm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         java.sql.ResultSet rs = pstm.executeQuery(sql);
 
-        int numRows = 1;
+        int numRows = 0;
         while (rs.next()) {
             numRows = rs.getRow();
         }
@@ -915,62 +917,140 @@ public class kasir extends javax.swing.JFrame {
         }
     private void CetakLast() {
         try {
-            String separator = "=".repeat(200); // Membuat garis pemisah sepanjang 200 karakter
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            PageFormat pageFormat = printerJob.defaultPage();
+            Paper paper = pageFormat.getPaper();
 
-            struk.setText(String.format("%200s", "WARUNG MIE NGANGENI") + "\n");
-            struk.setText(struk.getText() + String.format("%200s", "Barat Lapangan Kemlagi,") + "\n");
-            struk.setText(struk.getText() + String.format("%200s", "+62878 4019 9095,") + "\n");
-            struk.setText(struk.getText() + separator + "\n");
-            struk.setText(struk.getText() + "  Nama                                                                                   Jumlah               Harga" + "\n");
-            struk.setText(struk.getText() + separator + "\n");
+            // Set margin values to match the first snippet
+            double leftMargin = 10;   // Sesuaikan dengan margin kiri yang diinginkan
+            double rightMargin = 10;  // Sesuaikan dengan margin kanan yang diinginkan
+            double topMargin = 10;    // Sesuaikan dengan margin atas yang diinginkan
+            double bottomMargin = 10; // Sesuaikan dengan margin bawah yang diinginkan
 
-            DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+            paper.setImageableArea(leftMargin, topMargin, paper.getWidth() - leftMargin - rightMargin, paper.getHeight() - topMargin - bottomMargin);
+            pageFormat.setPaper(paper);
 
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                String Nama = df.getValueAt(i, 1).toString();
-                String Jumlah = df.getValueAt(i, 2).toString();
-                String Harga = df.getValueAt(i, 3).toString();
-
-                // Memastikan Nama tidak melebihi lebar printstruk
-                if (Nama.length() > 16) {
-                    String[] words = Nama.split(" ");
-                    String newNama = "";
-                    String currentLine = "";
-                    for (String word : words) {
-                        if (currentLine.length() + word.length() <= 16) {
-                            currentLine += word + " ";
-                        } else {
-                            newNama += currentLine.trim() + "\n";
-                            currentLine = word + " ";
-                        }
+            printerJob.setPrintable(new Printable() {
+                public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                    if (pageIndex != 0) {
+                        return NO_SUCH_PAGE;
                     }
-                    newNama += currentLine.trim();
-                    Nama = newNama;
+
+                    Graphics2D g2d = (Graphics2D) graphics;
+                    g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+                    Font font = new Font("Monospaced", Font.PLAIN, 11);
+                    g2d.setFont(font);
+
+                    String separator = "=".repeat(33); // Sesuaikan jumlah karakter dengan lebar kertas (80 mm)
+                    String centerAlign = "%-" + (32 / 2 + 16) + "s"; // Untuk rata tengah
+
+                    g2d.drawString(String.format(centerAlign, "WARUNG MIE NGANGENI"), 0, 10);
+                    g2d.drawString(String.format(centerAlign, "Barat Lapangan Kemlagi,"), 0, 20);
+                    g2d.drawString(String.format(centerAlign, "WA: 0878 4019 9095,"), 0, 32);
+                    g2d.drawString(separator, 0, 45);
+                    g2d.drawString(String.format("%-21s%-7s%-10s", "Nama", "Jumlah", "Harga"), 0, 55);
+                    g2d.drawString(separator, 0, 65);
+
+                    DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+
+                    int y = 75; // Koordinat awal untuk teks
+
+                    for (int i = 0; i < jTable1.getRowCount(); i++) {
+                        String Nama = df.getValueAt(i, 1).toString();
+                        int namaLength = Nama.length();
+                        if (namaLength < 21) {
+                            Nama = Nama + " ".repeat(21 - namaLength);
+                        } else if (namaLength > 21) {
+                            Nama = Nama.substring(0, 21);
+                        }
+
+                        String Jumlah = df.getValueAt(i, 2).toString();
+                        String Harga = df.getValueAt(i, 3).toString();
+
+                        // Menyesuaikan lebar jumlah dan harga
+                        String formattedJumlah = String.format("%-7s", Jumlah);
+                        String formattedHarga = String.format("%-10s", Harga);
+
+                        g2d.drawString(Nama + formattedJumlah + formattedHarga, 0, y);
+                        y += 10;
+                    }
+
+                    // Mendapatkan nilai harga1
+                    String hargaBaru = harga1.getText();
+
+                    y += 10;
+
+                    g2d.drawString(separator, 0, y);
+                    y += 10;
+
+                    String subTotalLabel = "Sub Total:";
+                    String cashLabel = "Cash:";
+                    String kembalianLabel = "Kembalian:";
+                    String subTotalValue = total.getText();
+                    String cashValue = pay.getText();
+                    String kembalianValue = bal1.getText();
+
+                    int labelWidth = Math.max(Math.max(subTotalLabel.length(), cashLabel.length()), kembalianLabel.length());
+
+                    g2d.drawString(String.format("%-" + labelWidth + "s", subTotalLabel) + subTotalValue, 119, y);
+                    y += 10;
+                    g2d.drawString(String.format("%-" + labelWidth + "s", cashLabel) + cashValue, 119, y);
+                    y += 10;
+                    g2d.drawString(String.format("%-" + labelWidth + "s", kembalianLabel) + kembalianValue, 119, y);
+                    y += 10;
+
+
+                    g2d.drawString(separator, 0, y);
+                    y += 15;
+
+                    g2d.drawString(String.format(centerAlign, "Terima Kasih Telah Memesan Disini"), 0, y);
+
+                    return PAGE_EXISTS;
                 }
+            }, pageFormat);
 
-                // Menyesuaikan lebar jumlah dan harga
-                String formattedJumlah = String.format("%-15s", Jumlah);
-                String formattedHarga = String.format("%-20s", Harga);
-
-                struk.setText(struk.getText() + " " + Nama + "\t\t" + formattedJumlah + "\t\t" + formattedHarga + "\n");
+            if (printerJob.printDialog()) {
+                printerJob.print();
             }
+            try {
+                // Menampilkan notifikasi "tunggu sebentar" saat mencetak
+                JOptionPane optionPane1 = new JOptionPane("Print sedang diproses...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                JDialog dialog1 = optionPane1.createDialog(this, "Tunggu Sebentar");
+                dialog1.setModal(false);
+                dialog1.setVisible(true);
 
-            // Mendapatkan nilai harga1
-            String hargaBaru = harga1.getText();
+                // Timer pertama untuk menutup notifikasi pertama setelah 5 detik
+                int delay1 = 8000;
+                Timer timer1 = new Timer(delay1, e -> {
+                    dialog1.dispose(); // Menutup notifikasi pertama
 
-            struk.setText(struk.getText() + separator + "\n");
-            struk.setText(struk.getText() + "Sub Total    : " + total.getText() + "\n");
-            struk.setText(struk.getText() + "Cash           : " + pay.getText() + "\n");
-            struk.setText(struk.getText() + "Kembalian : " + bal1.getText() + "\n");
-            struk.setText(struk.getText() + separator + "\n");
-            struk.setText(struk.getText() + String.format("%200s", "Terima Kasih Telah Memesan Disini") + "\n");
+                    // Menampilkan notifikasi "print selesai" tanpa tombol OK
+                    JOptionPane optionPane2 = new JOptionPane("Cetak selesai!", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+                    JDialog dialog2 = optionPane2.createDialog(this, "Proses Cetak");
+                    dialog2.setModal(false); // Memungkinkan untuk menutup secara otomatis
+                    dialog2.setVisible(true);
 
-            struk.print();
+                    // Timer kedua untuk menutup notifikasi kedua setelah 3 detik
+                    int delay2 = 3000;
+                    Timer timer2 = new Timer(delay2, e2 -> {
+                        dialog2.dispose(); // Menutup notifikasi kedua
+                    });
+                    timer2.setRepeats(false); // Timer hanya berjalan sekali
+                    timer2.start();
+                });
+                timer1.setRepeats(false); // Timer hanya berjalan sekali
+                timer1.start();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     public kasir() {
         initComponents();
         scheduleDataUpdate("SELECT * FROM menu INNER JOIN kategori_menu ON kategori_menu.kategori_id = menu.kategori_id WHERE kategori_menu.kategori_nama = 'Promosi'");
@@ -1319,6 +1399,11 @@ public class kasir extends javax.swing.JFrame {
         promosimenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         printstruk.setText("print");
+        printstruk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                printstrukMouseClicked(evt);
+            }
+        });
         printstruk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printstrukActionPerformed(evt);
@@ -1514,7 +1599,7 @@ public class kasir extends javax.swing.JFrame {
         harga7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga7.setText("10.000");
         jPanel1.add(harga7);
-        harga7.setBounds(130, 785, 80, 23);
+        harga7.setBounds(130, 785, 80, 24);
 
         datamenu8.setEditable(false);
         datamenu8.setBackground(new java.awt.Color(255, 255, 255));
@@ -1532,7 +1617,7 @@ public class kasir extends javax.swing.JFrame {
         harga8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga8.setText("10.000");
         jPanel1.add(harga8);
-        harga8.setBounds(360, 785, 80, 23);
+        harga8.setBounds(360, 785, 80, 24);
 
         datamenu9.setEditable(false);
         datamenu9.setBackground(new java.awt.Color(255, 255, 255));
@@ -1550,7 +1635,7 @@ public class kasir extends javax.swing.JFrame {
         harga9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga9.setText("10.000");
         jPanel1.add(harga9);
-        harga9.setBounds(580, 785, 80, 23);
+        harga9.setBounds(580, 785, 80, 24);
         jPanel1.add(displaygambar13);
         displaygambar13.setBounds(20, 1160, 190, 160);
         jPanel1.add(displaygambar14);
@@ -1574,7 +1659,7 @@ public class kasir extends javax.swing.JFrame {
         harga13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga13.setText("10.000");
         jPanel1.add(harga13);
-        harga13.setBounds(130, 1365, 80, 23);
+        harga13.setBounds(130, 1365, 80, 24);
 
         datamenu13.setEditable(false);
         datamenu13.setBackground(new java.awt.Color(255, 255, 255));
@@ -1604,7 +1689,7 @@ public class kasir extends javax.swing.JFrame {
         harga14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga14.setText("10.000");
         jPanel1.add(harga14);
-        harga14.setBounds(360, 1365, 80, 23);
+        harga14.setBounds(360, 1365, 80, 24);
 
         datamenu15.setEditable(false);
         datamenu15.setBackground(new java.awt.Color(255, 255, 255));
@@ -1622,25 +1707,25 @@ public class kasir extends javax.swing.JFrame {
         harga15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga15.setText("10.000");
         jPanel1.add(harga15);
-        harga15.setBounds(580, 1365, 80, 23);
+        harga15.setBounds(580, 1365, 80, 24);
 
         harga17.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga17.setText("10.000");
         jPanel1.add(harga17);
-        harga17.setBounds(360, 1655, 80, 23);
+        harga17.setBounds(360, 1655, 80, 24);
 
         harga18.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga18.setText("10.000");
         jPanel1.add(harga18);
-        harga18.setBounds(580, 1655, 80, 23);
+        harga18.setBounds(580, 1655, 80, 24);
 
         harga16.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga16.setText("10.000");
         jPanel1.add(harga16);
-        harga16.setBounds(130, 1655, 80, 23);
+        harga16.setBounds(130, 1655, 80, 24);
 
         datamenu16.setEditable(false);
         datamenu16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1694,19 +1779,19 @@ public class kasir extends javax.swing.JFrame {
         harga19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga19.setText("10.000");
         jPanel1.add(harga19);
-        harga19.setBounds(130, 1945, 80, 23);
+        harga19.setBounds(130, 1945, 80, 24);
 
         harga20.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga20.setText("10.000");
         jPanel1.add(harga20);
-        harga20.setBounds(360, 1945, 80, 23);
+        harga20.setBounds(360, 1945, 80, 24);
 
         harga21.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga21.setText("10.000");
         jPanel1.add(harga21);
-        harga21.setBounds(580, 1945, 80, 23);
+        harga21.setBounds(580, 1945, 80, 24);
 
         datamenu20.setEditable(false);
         datamenu20.setBackground(new java.awt.Color(255, 255, 255));
@@ -1736,7 +1821,7 @@ public class kasir extends javax.swing.JFrame {
         harga10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga10.setText("10.000");
         jPanel1.add(harga10);
-        harga10.setBounds(130, 1075, 80, 23);
+        harga10.setBounds(130, 1075, 80, 24);
 
         datamenu10.setEditable(false);
         datamenu10.setBackground(new java.awt.Color(255, 255, 255));
@@ -1766,7 +1851,7 @@ public class kasir extends javax.swing.JFrame {
         harga11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga11.setText("10.000");
         jPanel1.add(harga11);
-        harga11.setBounds(360, 1075, 80, 23);
+        harga11.setBounds(360, 1075, 80, 24);
 
         datamenu12.setEditable(false);
         datamenu12.setBackground(new java.awt.Color(255, 255, 255));
@@ -1784,13 +1869,13 @@ public class kasir extends javax.swing.JFrame {
         harga12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga12.setText("10.000");
         jPanel1.add(harga12);
-        harga12.setBounds(580, 1075, 80, 23);
+        harga12.setBounds(580, 1075, 80, 24);
 
         harga1.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga1.setText("10.000");
         jPanel1.add(harga1);
-        harga1.setBounds(127, 215, 80, 23);
+        harga1.setBounds(127, 215, 80, 24);
 
         datamenu1.setEditable(false);
         datamenu1.setBackground(new java.awt.Color(255, 255, 255));
@@ -1820,7 +1905,7 @@ public class kasir extends javax.swing.JFrame {
         harga3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga3.setText("10.000");
         jPanel1.add(harga3);
-        harga3.setBounds(580, 215, 80, 23);
+        harga3.setBounds(580, 215, 80, 24);
 
         datamenu2.setEditable(false);
         datamenu2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1874,25 +1959,25 @@ public class kasir extends javax.swing.JFrame {
         harga4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga4.setText("10.000");
         jPanel1.add(harga4);
-        harga4.setBounds(130, 505, 80, 23);
+        harga4.setBounds(130, 505, 80, 24);
 
         harga5.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga5.setText("10.000");
         jPanel1.add(harga5);
-        harga5.setBounds(360, 505, 80, 23);
+        harga5.setBounds(360, 505, 80, 24);
 
         harga6.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga6.setText("10.000");
         jPanel1.add(harga6);
-        harga6.setBounds(580, 505, 80, 23);
+        harga6.setBounds(580, 505, 80, 24);
 
         harga2.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga2.setText("10.000");
         jPanel1.add(harga2);
-        harga2.setBounds(358, 215, 80, 23);
+        harga2.setBounds(358, 215, 80, 24);
 
         jmlhmenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jmlhmenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -3531,7 +3616,7 @@ public class kasir extends javax.swing.JFrame {
         int paid = 0;
         if (!paycheck.isEmpty()) {
             paid = Integer.valueOf(paycheck.replaceAll(",", ""));
-            if(tot<paid){
+            if(tot<=paid){
                 int balance = paid - tot;
 
                 DecimalFormat df = new DecimalFormat();
@@ -3541,7 +3626,7 @@ public class kasir extends javax.swing.JFrame {
                 btnBawaPulang.setVisible(true);
                 btnMakanDisini.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(this, "Pembayaran harus lebih dari total harga pemesanan");
+                JOptionPane.showMessageDialog(this, "Pembayaran harus lebih dari atau sama dengan total harga pemesanan");
             }
         }else if(paycheck.isEmpty()){
             JOptionPane.showMessageDialog(this, "Masukkan Nominal Pembayaran");
@@ -3614,14 +3699,13 @@ public class kasir extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
                 
-                //tampilkan form struk
-                bgstruk.setVisible(true);
-                scrollpaneStruk.setVisible(true);
+                
                 //kode buat cetak struk
                 CetakLast();
                 
                 //hide popup struk
                 scheduleHideStruk();
+                
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.setRowCount(0); // Menghapus semua baris dalam JTable
 
@@ -3631,13 +3715,6 @@ public class kasir extends javax.swing.JFrame {
             // Jika tombol No ditekan, tutup popup konfirmasi
             JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(btncheckout);
             dialog.dispose();
-        }
-        try {
-            Thread.sleep(10000);
-            scheduleDataUpdate("SELECT * FROM menu INNER JOIN kategori_menu ON kategori_menu.kategori_id = menu.kategori_id WHERE kategori_menu.kategori_nama = 'Promosi'");
-            
-        } catch (InterruptedException ex) {
-            Logger.getLogger(kasir.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_printstrukActionPerformed
@@ -5237,6 +5314,10 @@ public class kasir extends javax.swing.JFrame {
             cal();
         }
     }//GEN-LAST:event_minus21MouseClicked
+
+    private void printstrukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printstrukMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printstrukMouseClicked
 
     /**
      * @param args the command line arguments

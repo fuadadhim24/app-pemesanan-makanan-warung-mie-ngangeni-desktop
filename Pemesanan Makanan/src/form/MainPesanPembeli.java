@@ -249,7 +249,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         java.sql.PreparedStatement pstm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         java.sql.ResultSet rs = pstm.executeQuery(sql);
 
-        int numRows = 1;
+        int numRows = 0;
         while (rs.next()) {
             numRows = rs.getRow();
         }
@@ -1437,7 +1437,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga7.setText("10.000");
         jPanel1.add(harga7);
-        harga7.setBounds(130, 785, 80, 23);
+        harga7.setBounds(130, 785, 80, 24);
 
         datamenu8.setEditable(false);
         datamenu8.setBackground(new java.awt.Color(255, 255, 255));
@@ -1455,7 +1455,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga8.setText("10.000");
         jPanel1.add(harga8);
-        harga8.setBounds(360, 785, 80, 23);
+        harga8.setBounds(360, 785, 80, 24);
 
         datamenu9.setEditable(false);
         datamenu9.setBackground(new java.awt.Color(255, 255, 255));
@@ -1473,7 +1473,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga9.setText("10.000");
         jPanel1.add(harga9);
-        harga9.setBounds(580, 785, 80, 23);
+        harga9.setBounds(580, 785, 80, 24);
         jPanel1.add(displaygambar13);
         displaygambar13.setBounds(20, 1160, 190, 160);
         jPanel1.add(displaygambar14);
@@ -1497,7 +1497,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga13.setText("10.000");
         jPanel1.add(harga13);
-        harga13.setBounds(130, 1365, 80, 23);
+        harga13.setBounds(130, 1365, 80, 24);
 
         datamenu13.setEditable(false);
         datamenu13.setBackground(new java.awt.Color(255, 255, 255));
@@ -1527,7 +1527,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga14.setText("10.000");
         jPanel1.add(harga14);
-        harga14.setBounds(360, 1365, 80, 23);
+        harga14.setBounds(360, 1365, 80, 24);
 
         datamenu15.setEditable(false);
         datamenu15.setBackground(new java.awt.Color(255, 255, 255));
@@ -1545,25 +1545,25 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga15.setText("10.000");
         jPanel1.add(harga15);
-        harga15.setBounds(580, 1365, 80, 23);
+        harga15.setBounds(580, 1365, 80, 24);
 
         harga17.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga17.setText("10.000");
         jPanel1.add(harga17);
-        harga17.setBounds(360, 1655, 80, 23);
+        harga17.setBounds(360, 1655, 80, 24);
 
         harga18.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga18.setText("10.000");
         jPanel1.add(harga18);
-        harga18.setBounds(580, 1655, 80, 23);
+        harga18.setBounds(580, 1655, 80, 24);
 
         harga16.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga16.setText("10.000");
         jPanel1.add(harga16);
-        harga16.setBounds(130, 1655, 80, 23);
+        harga16.setBounds(130, 1655, 80, 24);
 
         datamenu16.setEditable(false);
         datamenu16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1617,19 +1617,19 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga19.setText("10.000");
         jPanel1.add(harga19);
-        harga19.setBounds(130, 1945, 80, 23);
+        harga19.setBounds(130, 1945, 80, 24);
 
         harga20.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga20.setText("10.000");
         jPanel1.add(harga20);
-        harga20.setBounds(360, 1945, 80, 23);
+        harga20.setBounds(360, 1945, 80, 24);
 
         harga21.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga21.setText("10.000");
         jPanel1.add(harga21);
-        harga21.setBounds(580, 1945, 80, 23);
+        harga21.setBounds(580, 1945, 80, 24);
 
         datamenu20.setEditable(false);
         datamenu20.setBackground(new java.awt.Color(255, 255, 255));
@@ -1659,7 +1659,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga10.setText("10.000");
         jPanel1.add(harga10);
-        harga10.setBounds(130, 1075, 80, 23);
+        harga10.setBounds(130, 1075, 80, 24);
 
         datamenu10.setEditable(false);
         datamenu10.setBackground(new java.awt.Color(255, 255, 255));
@@ -1689,7 +1689,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga11.setText("10.000");
         jPanel1.add(harga11);
-        harga11.setBounds(360, 1075, 80, 23);
+        harga11.setBounds(360, 1075, 80, 24);
 
         datamenu12.setEditable(false);
         datamenu12.setBackground(new java.awt.Color(255, 255, 255));
@@ -1707,13 +1707,13 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga12.setText("10.000");
         jPanel1.add(harga12);
-        harga12.setBounds(580, 1075, 80, 23);
+        harga12.setBounds(580, 1075, 80, 24);
 
         harga1.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga1.setText("10.000");
         jPanel1.add(harga1);
-        harga1.setBounds(127, 215, 80, 23);
+        harga1.setBounds(127, 215, 80, 24);
 
         datamenu1.setEditable(false);
         datamenu1.setBackground(new java.awt.Color(255, 255, 255));
@@ -1743,7 +1743,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga3.setText("10.000");
         jPanel1.add(harga3);
-        harga3.setBounds(580, 215, 80, 23);
+        harga3.setBounds(580, 215, 80, 24);
 
         datamenu2.setEditable(false);
         datamenu2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1797,25 +1797,25 @@ public class MainPesanPembeli extends javax.swing.JFrame {
         harga4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga4.setText("10.000");
         jPanel1.add(harga4);
-        harga4.setBounds(130, 505, 80, 23);
+        harga4.setBounds(130, 505, 80, 24);
 
         harga5.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga5.setText("10.000");
         jPanel1.add(harga5);
-        harga5.setBounds(360, 505, 80, 23);
+        harga5.setBounds(360, 505, 80, 24);
 
         harga6.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga6.setText("10.000");
         jPanel1.add(harga6);
-        harga6.setBounds(580, 505, 80, 23);
+        harga6.setBounds(580, 505, 80, 24);
 
         harga2.setFont(new java.awt.Font("Futura Md BT", 1, 18)); // NOI18N
         harga2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         harga2.setText("10.000");
         jPanel1.add(harga2);
-        harga2.setBounds(358, 215, 80, 23);
+        harga2.setBounds(358, 215, 80, 24);
 
         jmlhmenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jmlhmenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2934,6 +2934,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
 
         promosimenu.add(btnmulaidariawal, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 700, 100, 60));
 
+        btncheckout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncheckout.setOpaque(false);
         btncheckout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -4840,7 +4841,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                     int qrCodeSize = 150; // Size of the QR Code
                     int textHeight = 50; // Height of the text 
                     String fileName = nomorPesanan;
-                    String imagePath = "C:\\Users\\fuada\\Desktop\\epim\\Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001\\Pemesanan Makanan Mie Ngangeni Desktop\\Pemesanan Makanan\\src\\qr code" ;
+                    String imagePath = "C:/Users/fuada/Desktop/epim/Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001/Pemesanan Makanan Mie Ngangeni Desktop/Pemesanan Makanan/src/qr code" ;
 
                     //generate barcode
                      try {
@@ -4992,7 +4993,7 @@ public class MainPesanPembeli extends javax.swing.JFrame {
                     timer.setRepeats(false); // Hanya berjalan sekali
                     timer.start();
                     
-                    imagePath = "C:\\Users\\fuada\\Desktop\\epim\\Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001\\Pemesanan Makanan Mie Ngangeni Desktop\\Pemesanan Makanan\\src\\qr code" + nomorPesanan + ".PNG";
+                    imagePath = "C:/Users/fuada/Desktop/epim/Pemesanan Makanan Mie Ngangeni Desktop-20230902T134338Z-001/Pemesanan Makanan Mie Ngangeni Desktop/Pemesanan Makanan/src/qr code" + nomorPesanan + ".PNG";
                     try {
                         printPNG(imagePath,250,333);
                         System.out.println("Printing completed.");
