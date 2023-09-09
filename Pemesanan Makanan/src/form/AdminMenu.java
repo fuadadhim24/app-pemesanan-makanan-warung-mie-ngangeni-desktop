@@ -2854,6 +2854,9 @@ public class AdminMenu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditIniEditMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditIniEditMouseEntered(evt);
+            }
         });
 
         javax.swing.GroupLayout btnEditIniEditLayout = new javax.swing.GroupLayout(btnEditIniEdit);
@@ -5429,22 +5432,22 @@ public class AdminMenu extends javax.swing.JFrame {
     private void btnEditIniEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditIniEditMouseClicked
         
         try {
-            char kategori = 0;
+            int kategori = 0;
             switch(btnkategori.getText()){
             case "    Makanan":
-                    kategori='2';
+                    kategori=2;
                 break;
             case "    Promosi":
-                    kategori='1';
+                    kategori=1;
                 break;
             case "    Minuman": 
-                    kategori='3';
+                    kategori=3;
                 break;
             case "    Snack":
-                    kategori='4';
+                    kategori=4;
                 break;
             }
-            String kategoriString = Character.toString(kategori);
+            
             
             // Baca data dari JTextField
             String menu = inputmenu.getText();
@@ -5464,7 +5467,7 @@ public class AdminMenu extends javax.swing.JFrame {
             byte[] fotoBytes = baos.toByteArray();
 
             // Membuat query SQL untuk mengupdate data di database
-            String sql = "UPDATE `menu` SET `nama_menu` = '"+inputmenu.getText()+"', `kategori_id` = '"+kategoriString+"', `harga` = '"+inputharga.getText()+"', `ketersediaan` = '"+tanpaspasiketersediaan+"', `path_gambar` =? WHERE `menu`.`id_menu` = "+label_id_menu.getText()+";";
+            String sql = "UPDATE `menu` SET `nama_menu` = '"+inputmenu.getText()+"', `kategori_id` = '"+kategori+"', `harga` = '"+inputharga.getText()+"', `ketersediaan` = '"+tanpaspasiketersediaan+"', `path_gambar` =? WHERE `menu`.`id_menu` = "+label_id_menu.getText()+";";
             java.sql.Connection conn = (Connection) Config.configDB();
             java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -5600,6 +5603,10 @@ public class AdminMenu extends javax.swing.JFrame {
     private void popupcloseinfomenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popupcloseinfomenuMouseClicked
         labelhelpedittutup();
     }//GEN-LAST:event_popupcloseinfomenuMouseClicked
+
+    private void btnEditIniEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditIniEditMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditIniEditMouseEntered
 
     /**
      * @param args the command line arguments

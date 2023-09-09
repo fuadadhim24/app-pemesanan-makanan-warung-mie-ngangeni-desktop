@@ -630,13 +630,13 @@ public class AdminKaryawan extends javax.swing.JFrame {
         displaygambar.setVisible(false);
     }
     private void removeFocusFromAllObjects(Container container) {
-    container.setFocusable(false);
-    for (Component child : container.getComponents()) {
-        if (child instanceof Container) {
-            removeFocusFromAllObjects((Container) child);
-        } else {
-            child.setFocusable(false);
-        }
+        container.setFocusable(false);
+        for (Component child : container.getComponents()) {
+            if (child instanceof Container) {
+                removeFocusFromAllObjects((Container) child);
+            } else {
+                child.setFocusable(false);
+            }
     }
 }
     
@@ -956,6 +956,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
         popupScanWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login/menunggu scan.png"))); // NOI18N
         getContentPane().add(popupScanWait, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -270, -1, -1));
 
+        btnDirectWA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDirectWA.setOpaque(false);
         btnDirectWA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3123,13 +3124,12 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        inputRfID.setText("jTextField1");
         inputRfID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputRfIDActionPerformed(evt);
             }
         });
-        getContentPane().add(inputRfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        getContentPane().add(inputRfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 300, -1));
 
         verifikatorScanRfId.setText("jTextField1");
         getContentPane().add(verifikatorScanRfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
@@ -3376,7 +3376,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
             // Siapkan statement untuk insert data ke tabel
             String sql = "INSERT INTO `akun` (`nik/id`, `username`, `password`, `hak_akses`) VALUES ('"+nik+"', '"+username+"', NULL, '"+tanpaspasijabatan+"');";
-            String sql1 = "INSERT INTO `detail_akun` (`nik/id`, `nama`, `no_wa`, `foto`,`rf_id`) VALUES (?, ?, ?, ?);";
+            String sql1 = "INSERT INTO `detail_akun` (`nik/id`, `nama`, `no_wa`, `foto`,`rf_id`) VALUES (?, ?, ?, ?, ?);";
 
             java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
             java.sql.PreparedStatement pstm1 = conn.prepareStatement(sql1);
@@ -3399,6 +3399,9 @@ public class AdminKaryawan extends javax.swing.JFrame {
 
             pstm1.close();
             pstm.close();
+            inputRfID.setText(null);
+            labelTambahRfId.setText(null);
+            labelTambahRfId.setText("ingin menambahkan rf id?");
 
         } catch (Exception e) {
                 try {
@@ -6087,6 +6090,7 @@ public class AdminKaryawan extends javax.swing.JFrame {
         scannik.setVisible(true);
         popupScanWait.setVisible(true);
         btnclosepopup.setVisible(true);
+        scannik.requestFocus();
         
         
     }//GEN-LAST:event_labelTambahRfIdMouseClicked
